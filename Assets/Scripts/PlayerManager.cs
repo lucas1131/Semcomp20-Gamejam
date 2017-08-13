@@ -15,7 +15,8 @@ public class PlayerManager : MonoBehaviour {
 	
 	public GameObject playerPrefab;
 
-	public char ToUpper(char key) { return key -= (char) ('a'-'A'); }
+	public static char ToUpper(char key) { return key -= (char) ('a'-'A'); }
+	public static char ToLower(char key) { return key += (char) ('a'-'A'); }
 
 	public bool KeyExists(char key){ return keys.Contains(ToUpper(key)); }
 

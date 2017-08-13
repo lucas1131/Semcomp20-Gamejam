@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
 	[UnityEngine.SerializeField]
 	public static bool isPlaying { get; set; }
 
-	public GameObject instructions;
-	public GameObject textBox;
+	public GameObject instructions, textBox;
+	public AudioSource sfx, bgm;
 	public SilvioSantos silvio;
 
 	// Use this for initialization
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
 		GameManager.isPlaying = false;
 		instructions.SetActive(true);
 		textBox.SetActive(false);
+		StartCoroutine(AudioEffects.FadeOut(bgm, 2f));
 		silvio.Reset();
 		pm.Reset();
 	}
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
 		instructions.SetActive(false);
 		isPlaying = true;
+		StartCoroutine(AudioEffects.FadeIn(bgm, 0.4f, 0.5f));
 
 		silvio.StartInitialDialog();
 

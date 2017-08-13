@@ -5,8 +5,9 @@ using UnityEngine;
 public class SFXManager : MonoBehaviour {
 
 	private AudioSource SFX;
-	public AudioSource BGM;
-	public AudioClip clap, boo, win, drums, pergunta, categoryTV, categoryCinema;
+	public AudioClip clap, boo, fanfare, drums;
+	public AudioClip[] categoryTV, categoryCinema, categoryMusic, categoryEvent,
+						win, lose, rodada;
 
 	void Awake(){
 		SFX = GetComponent<AudioSource>();
@@ -23,35 +24,52 @@ public class SFXManager : MonoBehaviour {
 			SFX.clip = boo;
 			break;
 
-		case "win":
-			SFX.clip = win;
+		case "fanfare":
+			SFX.clip = fanfare;
 			break;
 
 		case "drums":
 			SFX.clip = drums;
 			break;
-
-		case "pergunta":
-			SFX.clip = pergunta;
-			break;
-
-		case "categoryTV":
-			SFX.clip = categoryTV;
-			break;
-
-		case "categoryCinema":
-			SFX.clip = categoryCinema;
-			break;
-		}
+ 		}
 
 		SFX.Play();
+	}
+
+	public AudioClip GetClip(string audio){
+
+		int i = 0;
+		if(UnityEngine.Random.value < 0.5) i = 1;
+
+		switch(audio){
+
+		case "win":
+			return win[0];
+
+		case "lose":
+			return lose[0];
+
+		case "rodada":
+			return rodada[i];
+
+		case "cT":
+			return categoryTV[i];
+
+		case "cC":
+			return categoryCinema[i];
+
+		case "cM":
+			return categoryMusic[i];
+
+		case "cE":
+			return categoryEvent[i];
+		}
+
+		return null;
 	}
 
 	public void PlayClap() { Play("clap"); }
 	public void PlayBoo() { Play("boo"); }
 	public void PlayWin() { Play("win"); }
 	public void PlayDrums() { Play("drums"); }
-	public void PlayPergunta() { Play("pergunta"); }
-	public void PlayCategoryTV() { Play("categoryTV"); }
-	public void PlayCategoryCinema() { Play("categoryCinema"); }
 }

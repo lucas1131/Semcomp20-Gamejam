@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SilvioSantos : MonoBehaviour {
 
 	new public readonly string name = "Lombordo";
+	public readonly float AUDIO_LAG = 0.5f;
 	public Text door1, door2, door3;
 	public GameObject[] doorBoxes;
 	public char winnerKey;
@@ -31,6 +32,12 @@ public class SilvioSantos : MonoBehaviour {
 
 	void Awake(){
 		initialDialog.endDialog = EndInitialDiag;
+		
+		initialDialog.sentences[0].delay = 
+			initialDialog.sentences[0].voice.length + AUDIO_LAG;
+
+		initialDialog.sentences[1].delay = 
+			initialDialog.sentences[1].voice.length + AUDIO_LAG;
 	}
 
 	void Start(){
@@ -79,15 +86,24 @@ public class SilvioSantos : MonoBehaviour {
 		HideAnswers();
 
 		if(counter == 1) {
-		
-			SFX.Play("win");
-			winDialog.sentences[0].text += winnerKey;
+			
+			SFX.Play("fanfare");
+			winDialog.sentences[0].text += winnerKey + "!";
+			winDialog.sentences[0].delay = 2.0f;
+
+			winDialog.sentences[1].voice = SFX.GetClip("win");
+			winDialog.sentences[1].delay = 
+				winDialog.sentences[1].voice.length + AUDIO_LAG;
+
 			doorBoxes[correct-1].gameObject.SetActive(false);
 			gm.Winner(winnerKey); // Only one person remains!
 		
 		} else if(counter == 0) {
 		
 			SFX.Play("boo");
+			drawDialog.sentences[0].voice = SFX.GetClip("lose");
+			drawDialog.sentences[0].delay = drawDialog.sentences[0].voice.length;
+
 			doorBoxes[correct-1].gameObject.SetActive(false);
 			gm.Draw(); // Nobody answered correctly
 		
@@ -123,24 +139,23 @@ public class SilvioSantos : MonoBehaviour {
 		answer2 = aux[3];
 		answer3 = aux[4];
 
-		try {
-			correct = Int32.Parse(aux[5]);
-		} catch(Exception e) {}
+		correct = Int32.Parse(aux[5]);
 
-		dialogue.sentences[0].text = "Pergunta número " + (index + 1);
+		dialogue.sentences[0].text = "Próxima rodada!";
 		dialogue.sentences[1].text = category;
 		dialogue.sentences[2].text = question;
 		dialogue.sentences[3].text = "A resposta correta é a número " + correct + "!";
 		
-		dialogue.sentences[0].delay = 1.5f;
-		dialogue.sentences[1].delay = 1.5f;
-		dialogue.sentences[2].delay = 10f;
-		dialogue.sentences[3].delay = 2.5f;
-		
-		dialogue.sentences[0].voice = null;
-		dialogue.sentences[1].voice = null;
+		if(index == 0) dialogue.sentences[0].voice = SFX.rodada[0];
+		else dialogue.sentences[0].voice = SFX.GetClip("rodada");
+		dialogue.sentences[1].voice = SFX.GetClip("c" + category[0]);
 		dialogue.sentences[2].voice = null;
 		dialogue.sentences[3].voice = null;
+
+		dialogue.sentences[0].delay = dialogue.sentences[0].voice.length + AUDIO_LAG;
+		dialogue.sentences[1].delay = dialogue.sentences[1].voice.length + AUDIO_LAG;
+		dialogue.sentences[2].delay = 10f;
+		dialogue.sentences[3].delay = 2.5f;
 
 		dialogue.sentences[0].diagEvent = null;
 		dialogue.sentences[1].diagEvent = null;
@@ -156,7 +171,7 @@ public class SilvioSantos : MonoBehaviour {
 	}
 
 	public void PlayDrums(){
-		StartCoroutine(DrumRolls(8f));
+		StartCoroutine(DrumRolls(7.5f));
 	}
 
 	public void ShowAnswer(){

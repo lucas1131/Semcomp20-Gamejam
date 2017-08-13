@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour {
 
-	public bool fastText = true;
+	public bool fastText = false;
+	public AudioSource source;
 	public GameObject textBox;
 	private Text dialogueText, nameText;
 	private Queue<Sentence> sentences;
@@ -54,6 +55,11 @@ public class DialogManager : MonoBehaviour {
 		StopAllCoroutines();
 
 		if(currentSentence.diagEvent != null) currentSentence.diagEvent();
+		if(currentSentence.voice != null) {
+			source.clip = currentSentence.voice;
+			source.Play();
+		}
+
 		StartCoroutine(PrintChar(currentSentence.text));
 	}
 

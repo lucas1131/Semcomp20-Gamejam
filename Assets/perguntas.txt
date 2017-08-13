@@ -1,4 +1,3 @@
-Categoria	Pergunta	R1	R2	R3	RC	CSV
 Cinema	Qual ator faz o papel do protagonista em "Esqueceram de Mim"?	Devin Ratray	Jeff Cohen	Macaulay Culkin	3
 Cinema	Qual é o apelido da protagonista em "As Patricinhas de Beverly Hills"?	Dionne	Cher	Tai	2
 Cinema	"Edward Mãos de Tesoura" foi o _____ filme em que Johnny Depp e Tim Burton trabalharam juntos.	terceiro	quarto	primeiro	3

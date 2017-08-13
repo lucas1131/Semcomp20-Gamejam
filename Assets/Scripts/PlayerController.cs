@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 			break;
 
 		case 1:
-			Goto(new Vector3(-5f + offsetx, -1.5f + offsety, 0f));
+			Goto(new Vector3(-6f + offsetx, -1.5f + offsety, 0f));
 			break;
 
 		case 2:
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
 			break;
 
 		case 3:
-			Goto(new Vector3(5f + offsetx, -1.5f + offsety, 0f));
+			Goto(new Vector3(6f + offsetx, -1.5f + offsety, 0f));
 			break;
 		}
 

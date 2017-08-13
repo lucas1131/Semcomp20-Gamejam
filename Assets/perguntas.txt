@@ -1,0 +1,61 @@
+Categoria	Pergunta	R1	R2	R3	RC	CSV
+Cinema	Qual ator faz o papel do protagonista em "Esqueceram de Mim"?	Devin Ratray	Jeff Cohen	Macaulay Culkin	3
+Cinema	Qual é o apelido da protagonista em "As Patricinhas de Beverly Hills"?	Dionne	Cher	Tai	2
+Cinema	"Edward Mãos de Tesoura" foi o _____ filme em que Johnny Depp e Tim Burton trabalharam juntos.	terceiro	quarto	primeiro	3
+Cinema	Qual prêmio "Pulp Fiction" ganhou no Oscar em 1995?	Melhor Roteiro Original	Melhor Filme	Melhor Diretor	1
+Cinema	Em qual ilha é construído o "Jurassic Park" no primeiro filme da saga?	Isla Dublar	Isla Delfino	Isla Dino	1
+Cinema	Qual é a primeira regra do "Clube da Luta"?	Não convide para o Clube	Não fale sobre o Clube	Não visite o Clube	2
+Cinema	Quem canta a música-tema do filme "Pretty Woman"?	Elton John	Roy Orbison	Michael Jackson	2
+Cinema	Qual é o nome do assassino em "O Silêncio dos Inocentes"?	Hannibal Lecter	Hannibal James	Hannibal Allen	1
+Cinema	"Titanic" foi o primeiro filme a conseguir ______ de dólares mundialmente.	1 milhão	100 milhões	1 bilhão	3
+Cinema	De "O Rei Leão", o que significa o termo "Hakuna Matata"?	Dividir e conquistar	Viva na floresta	Sem problemas	3
+Cinema	Qual é o nome do clube de dança em "O Máskara"?	Coco Bongo	Bongo Bongo	Coco Conga	1
+Cinema	Qual destes não é um personagem do filme "Matrix"?	Trinity	Morpheus	Flynn	3
+Cinema	Qual é o nome da música que toca ao final de "Toy Story"?	Amigo Estou Aqui	Sentimentos São	Reflexão	1
+Cinema	Jim Carrey e Jeff Daniels protagonizaram dois amigos pouco inteligentes em qual filme?	Abracadabra	Débi & Loide	Meu Primeiro Amor	2
+Cinema	Qual é o nome do melhor amigo de Batatinha em "Os Batutinhas"?	Almeirão	Alface	Alfafa	3
+Cinema	O que o personagem Cole vê em "O Sexto Sentido"?	Gente morta	Espíritos de luz	Monstros	1
+Cinema	No filme de 1999, quantas coisas "eu odeio em você"?	20	10	15	2
+Cinema	No filme "Uma Babá Quase Perfeita", quem interpreta a Sra. Doubtfire?	Jim Carrey	Eddie Murphy	Robin Williams	3
+Cinema	Qual destas personalidades históricas "Forrest Gump" não encontra?	Freddie Mercury	Elvis Presley	John Lennon	1
+Cinema	Qual atriz interpreta a garota que sabe magia "Matilda"?	Christina Ricci	Kirsten Dunst	Mara Wilson	3
+Cinema	De qual cor é o moletom da garota no filme "A Lista de Schindler"?	Roxo	Azul	Vermelho	3
+Cinema	Qual é o subtítulo do filme "O Exterminador do Futuro 2"?	O Julgamento Final	A Salvação	A Rebelião das Máquinas	1
+Cinema	Qual personagem morre e volta como fantasma no filme "Ghost"?	Carl Bruner	Molly Jensen	Sam Wheat	3
+Cinema	Em que país foi feito o filme "Trainspotting"?	Estados Unidos	Reino Unido	Canadá	2
+Cinema	Qual destas cores não é um personagem de "Cães de Aluguel"?	Mr. Orange	Mr. White	Mr. Red	3
+Cinema	Para quem as freiras cantam ao final de "Mudança de Hábito"?	O presidente dos EUA	O bispo	O Papa	3
+Cinema	Em qual batalha se ambienta o filme "O Resgate do Soldado Ryan"?	Batalha da Manchúria	Batalha da Normandia	Batalha de Pearl Harbor	2
+Cinema	Qual destes números tiraria Alan Parrish de dentro do jogo "Jumanji" se caísse nos dados?	5	2	3	1
+Cinema	De que raça era o cachorro protagonista de "Beethoven"?	São-bernardo	Pitbull	Yorkshire Terrier	1
+Cinema	Qual letra identifica o personagem de Will Smith em "MIB: Homens de Preto"?	Agente J	Agente K	Agente L	2
+Televisão	O que as cartas faziam no programa "Show do Milhão"?	Retira alternativas erradas	Pede opinião da plateia	Pula uma questão	1
+Televisão	Qual era o nome do famoso vocalista masculino do "Qual é a Música"?	Marcos	João	Pablo	3
+Televisão	Silvio Santos realizava os sonhos dos telespectadores em qual programa?	Porta dos Desesperados	Porta da Esperança	Porta dos Sonhos	2
+Televisão	Qual destes não era um quadro do "Domingo Legal"?	De volta para minha terra	Banheira do Gugu	Piscina de Polvilho	3
+Televisão	Qual era o nome do personagem roxo que acompanhava Eliana no "Bom Dia e Cia"?	As Borboletas	Praga	Melocoton	3
+Televisão	Qual é o nome da versão moderna do programa "Roletrando", apresentado por Silvio Santos?	Pião da Felicidade	Roda a Roda	Topa ou Não Topa	2
+Televisão	Qual destas mulheres nunca apresentou o programa "Fantasia"?	Jackeline Petkovic	Amanda Françozo	Adriane Galisteu	3
+Televisão	O que os telespectadores deviam falar ao ligar para o famoso programa de Christina Rocha, no ar de 1997 a 1998?	Alô, Christina!	Quero ganhar!	Christina, atende!	1
+Televisão	Qual era o nome da personagem erótica, baseada na Mulher-Gato, que integrava o elenco do "Programa H"?	Samambaia	Feiticeira	Tiazinha	3
+Televisão	Qual destes programas do SBT imortalizou as famosas "câmeras escondidas"?	Cidade contra Cidade	Topa Tudo por Dinheiro	Em Nome do Amor	2
+Televisão	Qual eram os nomes das duas gêmeas da novela "Mulheres de Areia"?	Ruth e Roberta	Ruth e Raquel	Roberta e Raquel	2
+Televisão	Quem foi o escritor da novela "O Rei do Gado"?	Benedito Ruy Barbosa	Sílvio de Abreu	Aguinaldo Silva	1
+Televisão	Um Opala preto segue possíveis vítimas de assasinato: qual novela da Globo tem esse fato como fato central?	Pedra Sobre Pedra	A Próxima Vítima	De Corpo e Alma	2
+Televisão	A novela "Terra Nostra" retrata a imigração, para o Brasil, de qual nacionalidade?	Italiana	Espanhola	Francesa	1
+Televisão	Que atriz protagonizou as novelas "Marimar" e "Maria do Bairro"?	Dulce Maria	Thalía	Lucía Mendez	2
+Televisão	Quem é a irmã má em "A Usurpadora"?	Paola Bracho	Paulina Bracho	Paula Bracho	1
+Televisão	Qual é o nome da professora prinicipal de "Carrossel"?	Suzana	Maria	Helena	3
+Televisão	Qual é o nome da primeira música de abertura de "Malhação"?	Assim Caminha a Humanidade	Te Levar	Paraíso Proibido	1
+Televisão	Para incriminar Maria do Carmo, Laurinha se joga do alto de um prédio. Qual novela da Rede Globo tem essa cena?	A Viagem	Rainha da Sucata	Por Amor	2
+Televisão	Onde Will Smith morava na série "Um Maluco no Pedaço"?	Brooklyn	Bronks	Bel-Air	3
+Televisão	Qual é o nome do grupo que luta contra forças sobrenaturais na série "Buffy, A Caça-Vampiros"?	Mystery Gang	Strange Gang	Scooby Gang	3
+Televisão	Qual é o nome do famoso café da série "Friends"?	Central Perk	Central Coffee	Coffee Perk	1
+Televisão	Onde trabalhavam os protagonistas da série "Arquivo X"?	FBI	Interpol	Scotland Yard	1
+Televisão	Na série "Três é Demais", qual personagem era interpretada pelas gêmeas Mary-Kate e Ashley Olsen?	D.J. Tanner	Stephanie Tanner	Michelle Tanner	3
+Televisão	Em "Família Dinossauros", quem falava a frase "Você não é a mamãe"?	Baby	Robert	Charlene	1
+Televisão	Em "Kenan e Kel", qual é o refrigerante preferido de Kel?	Limão	Laranja	Cola	2
+Televisão	De quem é o assassinato investigado durante a série "Twin Peaks"?	Dale Cooper	Shelly Johnson	Laura Palmer	3
+ Televisão	Qual era o nome da cobra que vivia na árvore do saguão do "Castelo Rá-Tim-Bum"?	Biba	Morgana	Celeste	3
+ Televisão	Quais pastilhas encolhem o personagem Chapolin Colorado?	Nanicolina	Encolhina	Pequenina	1
+Televisão	Como é o nome do filho do Senhor Barriga em "Chaves"?	Godinez	Quico	Nhonho	3	

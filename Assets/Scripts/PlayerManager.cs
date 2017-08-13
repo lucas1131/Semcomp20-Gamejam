@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,16 @@ public class PlayerManager : MonoBehaviour {
 
 	public static readonly float IDLE_MIN_X = -6.0f;
 	public static readonly float IDLE_MAX_X = 7.0f;
-	public static readonly float IDLE_MIN_Y = -4.0f;
-	public static readonly float IDLE_MAX_Y = -2.0f;
+	public static readonly float IDLE_MIN_Y = -4.5f;
+	public static readonly float IDLE_MAX_Y = -3.5f;
 
 	public char[] keys = new char[26];
 	public GameObject[] players = new GameObject[26];
 	
 	public GameObject playerPrefab;
 
-	public static char ToUpper(char key) { return key -= (char) ('a'-'A'); }
-	public static char ToLower(char key) { return key += (char) ('a'-'A'); }
+	public static char ToUpper(char key) { return Char.ToUpper(key); }
+	public static char ToLower(char key) { return Char.ToLower(key); }
 
 	public bool KeyExists(char key){ return keys.Contains(ToUpper(key)); }
 
@@ -43,38 +44,34 @@ public class PlayerManager : MonoBehaviour {
 	public void AddPlayer(char key){
 		
 		key = ToUpper(key);
-
-		int index = key - 'A';
-
-		float x = UnityEngine.Random.Range(-6f, 7f);
-		float y = UnityEngine.Random.Range(-4f, -2f);
-		players[index] = Instantiate(playerPrefab, this.transform);
-		players[index].transform.position = new Vector3(x, y, 0f);
-		players[index].GetComponent<PlayerController>().playerKey = key;
+		AddPlayer(key, key - 'A');
 	}
 
 	private void AddPlayer(char key, int index){
 
-		float x = UnityEngine.Random.Range(-6, 7);
-		float y = UnityEngine.Random.Range(-4, -2);
+		float x = UnityEngine.Random.Range(IDLE_MIN_X, IDLE_MAX_X);
+		float y = UnityEngine.Random.Range(IDLE_MIN_Y, IDLE_MAX_Y);
+		
 		players[index] = Instantiate(playerPrefab, this.transform);
 		players[index].transform.position = new Vector3(x, y, 0f);
 		players[index].GetComponent<PlayerController>().playerKey = key;
 	}
 
 	public void RemovePlayer(char key){
-		
+
 		key = ToUpper(key);
+		RemovePlayer(key, key - 'A');
+	}
 
-		int index = key - 'A';
-
-		Debug.Log("index: " + index);
+	private void RemovePlayer(char key, int index){
+		Debug.Log("destroying key: " + key);
 		GameObject.Destroy(players[index]);
 		players[index] = null;
 	}
 
-	private void RemovePlayer(char key, int index){
-		GameObject.Destroy(players[index]);
-		players[index] = null;
+	public bool PlayerListIsEmpty(){
+		foreach(char c in keys)
+			if(c != '\0') return false;
+		return true;
 	}
 }

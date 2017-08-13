@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public static bool isPlaying { get; private set; }
 
 	public GameObject instructions;
+	public SilvioSantos silvio;
 
 	// Use this for initialization
 	void Start () {
@@ -41,14 +42,16 @@ public class GameManager : MonoBehaviour {
 
 	public void StartGame(){
 
+		if(pm.PlayerListIsEmpty()) return;
+
 		instructions.SetActive(false);
 		isPlaying = true;
 
-		StartInitialDialog();
+		silvio.StartInitialDialog();
 
 	}
 
-	private void StartInitialDialog(){
-
+	public void EndGame(){
+		Debug.Log("Game Ended!");
 	}
 }

@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private bool isMoving = false;
-	private TextMesh text;
+	private bool isMoving = false, reachedTarget = true;
+
+	private TextMesh text, selectText;
+	private Animator anim;
 	private static readonly int OPTIONS = 3;
-	private int selected = 0;
+	private static readonly float THRESHOLD = 0.5f;
+
+	private int _selected;
+	public int selected { 
+		get { return this._selected; }
+		private set { this._selected = value; }
+	}
 	
 	private char _playerKey;
 	public char playerKey { 
@@ -18,25 +26,36 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public float speed = 3;
 	public static readonly Vector2 REFERENCE = new Vector2(0, -3);
 
 	void Awake(){
-		this.text = gameObject.GetComponentsInChildren<TextMesh>()[0];
+		TextMesh[] aux = gameObject.GetComponentsInChildren<TextMesh>();
+		this.text = aux[0];
+		this.selectText = aux[1];
 	}
 
 	void Start (){
 
 		Color c = UnityEngine.Random.ColorHSV();
 
-		gameObject.GetComponent<SpriteRenderer>().color = c;
-		this.text.color = new Color(1-c.r, 1-c.g, 1-c.b);
+		GetComponentInChildren<SpriteRenderer>().color = c;
+
+		Color textColor = new Color(1-c.r, 1-c.g, 1-c.b);
+
+		this.anim = GetComponentInChildren<Animator>();
+		this.text.color = textColor;
+		this.selectText.color = textColor;
 	}
 	
 	// Update is called once per frame
 	void Update (){
 		
-		if(selected == 0){
+		float offsetx = Random.Range(-1f, 1f);
+		float offsety = Random.Range(-0.5f, 0.5f);
 
+		switch(selected){
+		case 0:
 			Return();
 
 			if(!isMoving)
@@ -44,20 +63,54 @@ public class PlayerController : MonoBehaviour {
 					PlayerManager.IDLE_MAX_X, 
 					PlayerManager.IDLE_MIN_Y, 
 					PlayerManager.IDLE_MAX_Y);
+			break;
+
+		case 1:
+			Goto(new Vector3(-5f + offsetx, -2f + offsety, 0f));
+			break;
+
+		case 2:
+			Goto(new Vector3(0f + offsetx, -2f + offsety, 0f));
+			break;
+
+		case 3:
+			Goto(new Vector3(5f + offsetx, -2f + offsety, 0f));
+			break;
 		}
 
 		if(GameManager.isPlaying){
-			if(Input.GetKeyDown(PlayerManager.ToLower(playerKey) + ""))
-				selected = (selected+1)%OPTIONS;
+			if(Input.GetKeyDown(PlayerManager.ToLower(playerKey) + "")){
+
+				selected = (selected+1)%(OPTIONS+1);
+				anim.SetBool("isExcited", false);
+				reachedTarget = false; // new target
+
+				// Stop movement
+				isMoving = false;
+
+				StopAllCoroutines();
+
+				// Update selected door
+				if(selected == 0) this.selectText.text = "";
+				else this.selectText.text = this.selected + "";
+			}
 		}
 	}
 
-	public void Return(){
+	private void Goto(Vector3 target){
+
+		if(isMoving || reachedTarget) return;
+
+		StopAllCoroutines();
+		StartCoroutine(Seek(target));
+	}
+
+	private void Return(){
 		
 		float y = gameObject.transform.position.y;
 
-		if(y > -1.5) StartCoroutine(MoveY(-10f, 10f, -0.01f, gameObject.transform.position.y, 5));
-		else if(y < -6) StartCoroutine(MoveY(-10f, 10f, 0.01f, gameObject.transform.position.y, 5));
+		if(y > -4) StartCoroutine(MoveY(-10f, 10f, -0.02f, gameObject.transform.position.y, 5));
+		else if(y < -6) StartCoroutine(MoveY(-10f, 10f, 0.015f, gameObject.transform.position.y, 6));
 	}
 
 	private void SmallMovement(float minX, float maxX, float minY, float maxY){
@@ -110,6 +163,28 @@ public class PlayerController : MonoBehaviour {
 		isMoving = false;
 	}
 
+	IEnumerator Seek(Vector3 target){
+
+		isMoving = true;
+
+		Vector3 distance = (target - gameObject.transform.position);
+		Vector3 direction = distance.normalized;
+
+		while(distance.magnitude > THRESHOLD){
+	
+			// Move
+			gameObject.transform.Translate(direction*Time.deltaTime*speed);
+			
+			yield return null;
+
+			// Recalculate distance
+			distance = (target - gameObject.transform.position);
+		}
+
+		isMoving = false;
+		reachedTarget = true;
+		anim.SetBool("isExcited", true);
+	}
 
 	private bool InRange(float min, float max, float move, float pos){
 		float target = pos + move;
@@ -129,14 +204,6 @@ public class PlayerController : MonoBehaviour {
 		
 		return this.playerKey == pc.playerKey;
 	}
-
-	// public bool Equals(PlayerController pc){
-		
-	// 	if ((object) pc == null)
-	// 		return false;
-		
-	// 	return this.playerKey == pc.playerKey;
-	// }
 
 	public bool Equals(char key){
 		

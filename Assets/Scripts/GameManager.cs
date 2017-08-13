@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(AudioEffects.FadeOut(bgm, 2f));
 		silvio.Reset();
 		pm.Reset();
+		dm.Reset();
 	}
 
 	public void Winner(char key){
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour {
 
 		instructions.SetActive(false);
 		isPlaying = true;
-		StartCoroutine(AudioEffects.FadeIn(bgm, 0.4f, 0.5f));
+		StartCoroutine(AudioEffects.FadeIn(bgm, 0.5f, 0.3f));
 
 		silvio.StartInitialDialog();
 

@@ -23,6 +23,14 @@ public class DialogManager : MonoBehaviour {
 		nameText = aux[1];
 	}
 	
+	public void Reset(){
+		sentences = new Queue<Sentence>();
+
+		Text[] aux = textBox.GetComponentsInChildren<Text>();
+
+		dialogueText = aux[0];
+		nameText = aux[1];
+	}
 
 	public void StartDialog(Dialogue d, string name){
 		

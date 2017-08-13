@@ -85,6 +85,7 @@ public class SilvioSantos : MonoBehaviour {
 
 		HideAnswers();
 
+		// Win
 		if(counter == 1) {
 			
 			SFX.Play("fanfare");
@@ -102,7 +103,10 @@ public class SilvioSantos : MonoBehaviour {
 		
 			SFX.Play("boo");
 			drawDialog.sentences[0].voice = SFX.GetClip("lose");
-			drawDialog.sentences[0].delay = drawDialog.sentences[0].voice.length;
+			float time = drawDialog.sentences[0].voice.length/2.8f;
+			drawDialog.sentences[0].delay = time;
+			drawDialog.sentences[1].delay = 
+				drawDialog.sentences[0].voice.length-time;
 
 			doorBoxes[correct-1].gameObject.SetActive(false);
 			gm.Draw(); // Nobody answered correctly
@@ -197,7 +201,7 @@ public class SilvioSantos : MonoBehaviour {
 		ShowAnswers();
 		yield return new WaitForSeconds(timeToDrums);
 		SFX.Play("drums");
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(1.8f);
 		ShowAnswer();
 	}
 }

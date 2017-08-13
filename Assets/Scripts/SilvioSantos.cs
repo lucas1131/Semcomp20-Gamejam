@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class SilvioSantos : MonoBehaviour {
 
-	new public readonly string name = "Silvio Santos";
+	new public readonly string name = "Lombordo";
 	public Text door1, door2, door3;
+	public GameObject[] doorBoxes;
+	public char winnerKey;
 
 	public DialogManager dm;
 	public PlayerManager pm;
@@ -16,6 +18,7 @@ public class SilvioSantos : MonoBehaviour {
 
 	public Dialogue initialDialog;
 	public Dialogue dialogue;
+	public Dialogue winDialog, drawDialog;
 
 	[UnityEngine.SerializeField]
 	private TextAsset file;
@@ -27,13 +30,14 @@ public class SilvioSantos : MonoBehaviour {
 	private int index = 0;
 
 	void Awake(){
-		initialDialog.diagFunc = EndInitialDiag;
+		initialDialog.endDialog = EndInitialDiag;
 	}
 
 	void Start(){
-		dialogue = new Dialogue();
-		dialogue.diagFunc = CheckAnswer;
+		dialogue = new Dialogue(4);
+		dialogue.endDialog = CheckAnswer;
 		Scramble();
+		HideAnswers();
 	}
 
 	public void Scramble(){
@@ -51,7 +55,7 @@ public class SilvioSantos : MonoBehaviour {
 	public void CheckAnswer(){
 		
 		int counter = 0;
-		char winnerKey = '\0';
+		winnerKey = '\0';
 
 		foreach(GameObject go in pm.players){
 
@@ -69,13 +73,21 @@ public class SilvioSantos : MonoBehaviour {
 		}
 
 		if(counter == 1) {
+		
 			SFX.Play("win");
+			winDialog.sentences[0].text += winnerKey;
+			doorBoxes[correct-1].gameObject.SetActive(false);
 			gm.Winner(winnerKey); // Only one person remains!
+		
 		} else if(counter == 0) {
+		
 			SFX.Play("boo");
+			doorBoxes[correct-1].gameObject.SetActive(false);
 			gm.Draw(); // Nobody answered correctly
+		
 		} else {
 			SFX.Play("pergunta");
+			pm.ResetPlayers();
 			ReadQuestionCard(); // Next question
 		}
 	}
@@ -87,15 +99,17 @@ public class SilvioSantos : MonoBehaviour {
 	public void Reset(){
 		index = 0;
 		Scramble();
+		HideAnswers();
+		GameManager.isPlaying = false;
 	}
 
 	public void StartInitialDialog(){
+		HideAnswers();
 		dm.StartDialog(initialDialog, name);
 	}
 
 	public void ReadQuestionCard(){
 
-		float timeToDrums = 0;
 		string[] aux = cards[index].Split('\t');
 
 		category = aux[0];
@@ -103,43 +117,67 @@ public class SilvioSantos : MonoBehaviour {
 		answer1 = aux[2];
 		answer2 = aux[3];
 		answer3 = aux[4];
-		correct = Int32.Parse(aux[5]);
 
-		dialogue.sentences = new string[4];
-		dialogue.sentences[0] = "Pergunta número " + (index + 1);
-		dialogue.sentences[1] = category;
-		dialogue.sentences[2] = question;
-		dialogue.sentences[3] = "A resposta correta é a número " + correct + "!";
+		try {
+			correct = Int32.Parse(aux[5]);
+		} catch(Exception e) {}
 
-		dialogue.sentenceDelay = new float[4];
-		dialogue.sentenceDelay[0] = 2f;
-		dialogue.sentenceDelay[1] = 1.5f;
-		dialogue.sentenceDelay[2] = 10f;
-		dialogue.sentenceDelay[3] = 3f;
+		dialogue.sentences[0].text = "Pergunta número " + (index + 1);
+		dialogue.sentences[1].text = category;
+		dialogue.sentences[2].text = question;
+		dialogue.sentences[3].text = "A resposta correta é a número " + correct + "!";
+		
+		dialogue.sentences[0].delay = 1.5f;
+		dialogue.sentences[1].delay = 1.5f;
+		dialogue.sentences[2].delay = 10f;
+		dialogue.sentences[3].delay = 2.5f;
+		
+		dialogue.sentences[0].voice = null;
+		dialogue.sentences[1].voice = null;
+		dialogue.sentences[2].voice = null;
+		dialogue.sentences[3].voice = null;
 
-		// dialogue.sentenceDelay[0] = 0.6f;
-		// dialogue.sentenceDelay[1] = 0.6f;
-		// dialogue.sentenceDelay[2] = 0.6f;
-		// dialogue.sentenceDelay[3] = 0.6f;
+		dialogue.sentences[0].diagEvent = null;
+		dialogue.sentences[1].diagEvent = null;
+		dialogue.sentences[2].diagEvent = PlayDrums;
+		dialogue.sentences[3].diagEvent = null;
 
-		timeToDrums = dialogue.sentenceDelay[0] +
-						dialogue.sentenceDelay[1] +
-						dialogue.sentenceDelay[2] - 2;
-		StartCoroutine(DrumRolls(timeToDrums));
-
-		door1.enabled = true;
 		door1.text = answer1;
-		door2.enabled = true;
 		door2.text = answer2;
-		door3.enabled = true;
 		door3.text = answer3;
 
 		dm.StartDialog(dialogue, name);
 		index++;
 	}
 
+	public void PlayDrums(){
+		StartCoroutine(DrumRolls(8f));
+	}
+
+	public void ShowAnswer(){
+		doorBoxes[0].gameObject.SetActive(false);
+		doorBoxes[1].gameObject.SetActive(false);
+		doorBoxes[2].gameObject.SetActive(false);
+		doorBoxes[correct-1].gameObject.SetActive(true);
+	}
+
+	public void ShowAnswers(){
+		doorBoxes[0].gameObject.SetActive(true);
+		doorBoxes[1].gameObject.SetActive(true);
+		doorBoxes[2].gameObject.SetActive(true);
+	}
+
+	public void HideAnswers(){
+		doorBoxes[0].gameObject.SetActive(false);
+		doorBoxes[1].gameObject.SetActive(false);
+		doorBoxes[2].gameObject.SetActive(false);
+	}
+
 	IEnumerator DrumRolls(float timeToDrums){
+		ShowAnswers();
 		yield return new WaitForSeconds(timeToDrums);
 		SFX.Play("drums");
+		yield return new WaitForSeconds(2);
+		ShowAnswer();
 	}
 }

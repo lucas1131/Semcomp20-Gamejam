@@ -8,8 +8,8 @@ public class PlayerManager : MonoBehaviour {
 
 	public static readonly float IDLE_MIN_X = -6.0f;
 	public static readonly float IDLE_MAX_X = 7.0f;
-	public static readonly float IDLE_MIN_Y = -4.5f;
-	public static readonly float IDLE_MAX_Y = -3.5f;
+	public static readonly float IDLE_MIN_Y = -4.0f;
+	public static readonly float IDLE_MAX_Y = -2.5f;
 
 	public char[] keys = new char[26];
 	public GameObject[] players = new GameObject[26];
@@ -64,9 +64,15 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	private void RemovePlayer(char key, int index){
-		Debug.Log("destroying key: " + key);
 		GameObject.Destroy(players[index]);
 		players[index] = null;
+	}
+
+	public void ResetPlayers(){
+		foreach(GameObject pc in players){
+			if(pc != null)
+				pc.GetComponent<PlayerController>().selected = 0;
+		}
 	}
 
 	public bool PlayerListIsEmpty(){

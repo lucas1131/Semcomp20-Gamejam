@@ -8,14 +8,13 @@ public class DialogManager : MonoBehaviour {
 	public bool fastText = true;
 	public GameObject textBox;
 	private Text dialogueText, nameText;
-	private Queue<string> sentences;
-	private Queue<float> delays;
+	private Queue<Sentence> sentences;
+	private Sentence currentSentence;
 	private Dialogue currentDiag;
 
 	void Start () {
 
-		sentences = new Queue<string>();
-		delays = new Queue<float>();
+		sentences = new Queue<Sentence>();
 
 		Text[] aux = textBox.GetComponentsInChildren<Text>();
 
@@ -28,7 +27,6 @@ public class DialogManager : MonoBehaviour {
 		
 		// Clear current dialog state
 		sentences.Clear();
-		delays.Clear();
 		
 		currentDiag = d; // Assign new dialog
 
@@ -36,30 +34,32 @@ public class DialogManager : MonoBehaviour {
 
 		nameText.text = name;
 
-		foreach(string sentence in d.sentences)
+		foreach(Sentence sentence in d.sentences)
 			sentences.Enqueue(sentence);
-
-		foreach(float delay in d.sentenceDelay)
-			delays.Enqueue(delay);
 
 		NextSentence();
 	}
 
 	private void NextSentence(){
+
 		if(sentences.Count == 0){
 			EndDialogue();
 			return;
 		}
 
-		string s = sentences.Dequeue();
+		currentSentence = sentences.Dequeue();
 		dialogueText.text = "";
 
-		StopCoroutine(PrintChar(s));
-		StartCoroutine(PrintChar(s));
+		// StopCoroutine(PrintChar(currentSentence.text));
+		StopAllCoroutines();
+
+		if(currentSentence.diagEvent != null) currentSentence.diagEvent();
+		StartCoroutine(PrintChar(currentSentence.text));
 	}
 
 	public void EndDialogue(){
-		currentDiag.diagFunc();
+		if(currentDiag.endDialog != null)
+			currentDiag.endDialog();
 	}
 
 	IEnumerator PrintChar(string sentence){
@@ -82,7 +82,7 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	IEnumerator AutoAdvance(){
-		yield return new WaitForSeconds(delays.Dequeue());
+		yield return new WaitForSeconds(currentSentence.delay);
 		NextSentence();
 	}
 }

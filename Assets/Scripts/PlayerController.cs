@@ -11,11 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private static readonly int OPTIONS = 3;
 	private static readonly float THRESHOLD = 0.5f;
 
-	private int _selected;
-	public int selected { 
-		get { return this._selected; }
-		private set { this._selected = value; }
-	}
+	public int selected;
 	
 	private char _playerKey;
 	public char playerKey { 
@@ -109,8 +105,8 @@ public class PlayerController : MonoBehaviour {
 		
 		float y = gameObject.transform.position.y;
 
-		if(y > -4) StartCoroutine(MoveY(-10f, 10f, -0.02f, gameObject.transform.position.y, 5));
-		else if(y < -6) StartCoroutine(MoveY(-10f, 10f, 0.015f, gameObject.transform.position.y, 6));
+		if(y > PlayerManager.IDLE_MAX_Y) StartCoroutine(MoveY(-10f, 10f, -0.02f, gameObject.transform.position.y, 5));
+		else if(y < PlayerManager.IDLE_MIN_Y) StartCoroutine(MoveY(-10f, 10f, 0.015f, gameObject.transform.position.y, 4));
 	}
 
 	private void SmallMovement(float minX, float maxX, float minY, float maxY){

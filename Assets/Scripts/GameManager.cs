@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour {
 
 	[UnityEngine.SerializeField]
 	private PlayerManager pm;
+	[UnityEngine.SerializeField]
+	private DialogManager dm;
 
 	[UnityEngine.SerializeField]
-	public static bool isPlaying { get; private set; }
+	public static bool isPlaying { get; set; }
 
 	public GameObject instructions;
 	public SilvioSantos silvio;
@@ -41,11 +43,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Winner(char key){
-		Debug.Log("Letter " + key + " won!");
+		dm.StartDialog(silvio.winDialog, silvio.name);
 	}
 
 	public void Draw(){
-		Debug.Log("Its a draw! Everybody loses :(");
+		dm.StartDialog(silvio.drawDialog, silvio.name);
 	}
 
 	public void StartGame(){

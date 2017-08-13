@@ -9,12 +9,13 @@ public class SilvioSantos : MonoBehaviour {
 	new public readonly string name = "Silvio Santos";
 	public Text door1, door2, door3;
 
-	public Dialogue initialDialog;
-	public Dialogue dialogue;
-
 	public DialogManager dm;
 	public PlayerManager pm;
 	public GameManager gm;
+	public SFXManager SFX;
+
+	public Dialogue initialDialog;
+	public Dialogue dialogue;
 
 	[UnityEngine.SerializeField]
 	private TextAsset file;
@@ -59,7 +60,6 @@ public class SilvioSantos : MonoBehaviour {
 			PlayerController pc = go.GetComponent<PlayerController>();
 			
 			if(pc.selected != correct){ // Find losers to remove from the game
-				Debug.Log("key: " + pc.playerKey);
 				pm.RemoveChar(pc.playerKey);
 			
 			} else { // Correct answer
@@ -68,9 +68,16 @@ public class SilvioSantos : MonoBehaviour {
 			}
 		}
 
-		if(counter == 1) gm.Winner(winnerKey); // Only one person remains!
-		else if(counter == 0) gm.Draw(); // Nobody answered correctly
-		else ReadQuestionCard(); // Next question
+		if(counter == 1) {
+			SFX.Play("win");
+			gm.Winner(winnerKey); // Only one person remains!
+		} else if(counter == 0) {
+			SFX.Play("boo");
+			gm.Draw(); // Nobody answered correctly
+		} else {
+			SFX.Play("pergunta");
+			ReadQuestionCard(); // Next question
+		}
 	}
 
 	public void EndInitialDiag(){
@@ -88,6 +95,7 @@ public class SilvioSantos : MonoBehaviour {
 
 	public void ReadQuestionCard(){
 
+		float timeToDrums = 0;
 		string[] aux = cards[index].Split('\t');
 
 		category = aux[0];
@@ -104,15 +112,20 @@ public class SilvioSantos : MonoBehaviour {
 		dialogue.sentences[3] = "A resposta correta é a número " + correct + "!";
 
 		dialogue.sentenceDelay = new float[4];
-		// dialogue.sentenceDelay[0] = 2f;
-		// dialogue.sentenceDelay[1] = 1.5f;
-		// dialogue.sentenceDelay[2] = 10f;
-		// dialogue.sentenceDelay[3] = 3f;
+		dialogue.sentenceDelay[0] = 2f;
+		dialogue.sentenceDelay[1] = 1.5f;
+		dialogue.sentenceDelay[2] = 10f;
+		dialogue.sentenceDelay[3] = 3f;
 
-		dialogue.sentenceDelay[0] = 0.3f;
-		dialogue.sentenceDelay[1] = 0.3f;
-		dialogue.sentenceDelay[2] = 0.3f;
-		dialogue.sentenceDelay[3] = 0.3f;
+		// dialogue.sentenceDelay[0] = 0.6f;
+		// dialogue.sentenceDelay[1] = 0.6f;
+		// dialogue.sentenceDelay[2] = 0.6f;
+		// dialogue.sentenceDelay[3] = 0.6f;
+
+		timeToDrums = dialogue.sentenceDelay[0] +
+						dialogue.sentenceDelay[1] +
+						dialogue.sentenceDelay[2] - 2;
+		StartCoroutine(DrumRolls(timeToDrums));
 
 		door1.enabled = true;
 		door1.text = answer1;
@@ -123,5 +136,10 @@ public class SilvioSantos : MonoBehaviour {
 
 		dm.StartDialog(dialogue, name);
 		index++;
+	}
+
+	IEnumerator DrumRolls(float timeToDrums){
+		yield return new WaitForSeconds(timeToDrums);
+		SFX.Play("drums");
 	}
 }

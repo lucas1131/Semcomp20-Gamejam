@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class SilvioSantos : MonoBehaviour {
 
 	new public readonly string name = "Silvio Santos";
-	public DialogManager dm;
 	public Text door1, door2, door3;
 
 	public Dialogue initialDialog;
 	public Dialogue dialogue;
 
+	public DialogManager dm;
 	public PlayerManager pm;
+	public GameManager gm;
 
 	[UnityEngine.SerializeField]
 	private TextAsset file;
@@ -47,17 +48,29 @@ public class SilvioSantos : MonoBehaviour {
 	}
 
 	public void CheckAnswer(){
+		
+		int counter = 0;
+		char winnerKey = '\0';
+
 		foreach(GameObject go in pm.players){
 
 			if(go == null) continue;
 
 			PlayerController pc = go.GetComponent<PlayerController>();
 			
-			if(pc.selected != correct){
+			if(pc.selected != correct){ // Find losers to remove from the game
 				Debug.Log("key: " + pc.playerKey);
 				pm.RemoveChar(pc.playerKey);
+			
+			} else { // Correct answer
+				counter++;
+				winnerKey = pc.playerKey; // Store potential winner key code
 			}
 		}
+
+		if(counter == 1) gm.Winner(winnerKey); // Only one person remains!
+		else if(counter == 0) gm.Draw(); // Nobody answered correctly
+		else ReadQuestionCard(); // Next question
 	}
 
 	public void EndInitialDiag(){
@@ -91,10 +104,10 @@ public class SilvioSantos : MonoBehaviour {
 		dialogue.sentences[3] = "A resposta correta é a número " + correct + "!";
 
 		dialogue.sentenceDelay = new float[4];
-		dialogue.sentenceDelay[0] = 2f;
-		dialogue.sentenceDelay[1] = 1.5f;
-		dialogue.sentenceDelay[2] = 1.5f;
-		dialogue.sentenceDelay[3] = 3f;
+		// dialogue.sentenceDelay[0] = 2f;
+		// dialogue.sentenceDelay[1] = 1.5f;
+		// dialogue.sentenceDelay[2] = 10f;
+		// dialogue.sentenceDelay[3] = 3f;
 
 		dialogue.sentenceDelay[0] = 0.3f;
 		dialogue.sentenceDelay[1] = 0.3f;

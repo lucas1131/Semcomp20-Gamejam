@@ -40,6 +40,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void Winner(char key){
+		Debug.Log("Letter " + key + " won!");
+	}
+
+	public void Draw(){
+		Debug.Log("Its a draw! Everybody loses :(");
+	}
+
 	public void StartGame(){
 
 		if(pm.PlayerListIsEmpty()) return;

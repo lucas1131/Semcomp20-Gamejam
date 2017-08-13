@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour {
 	public static readonly float IDLE_MIN_X = -6.0f;
 	public static readonly float IDLE_MAX_X = 7.0f;
 	public static readonly float IDLE_MIN_Y = -4.0f;
-	public static readonly float IDLE_MAX_Y = -2.5f;
+	public static readonly float IDLE_MAX_Y = -3f;
 
 	public char[] keys = new char[26];
 	public GameObject[] players = new GameObject[26];
@@ -66,6 +66,10 @@ public class PlayerManager : MonoBehaviour {
 	private void RemovePlayer(char key, int index){
 		GameObject.Destroy(players[index]);
 		players[index] = null;
+	}
+
+	public void Reset(){
+		ResetPlayers();
 	}
 
 	public void ResetPlayers(){

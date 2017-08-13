@@ -23,11 +23,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(isPlaying){ // Playing
-
-
-
-		} else { // Waiting for game to start
+		if(!isPlaying){ // Playing
 
 			if(Input.GetKeyDown(KeyCode.Space))
 				StartGame();
@@ -40,6 +36,12 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void Reset(){
+		GameManager.isPlaying = false;
+		silvio.Reset();
+		pm.Reset();
 	}
 
 	public void Winner(char key){

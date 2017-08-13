@@ -100,7 +100,6 @@ public class SilvioSantos : MonoBehaviour {
 		index = 0;
 		Scramble();
 		HideAnswers();
-		GameManager.isPlaying = false;
 	}
 
 	public void StartInitialDialog(){

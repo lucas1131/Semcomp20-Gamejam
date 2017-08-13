@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 229148089}
   - component: {fileID: 229148088}
   m_Layer: 5
-  m_Name: Silvio Santos
+  m_Name: Lombardi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,6 +253,11 @@ MonoBehaviour:
   door1: {fileID: 713805120}
   door2: {fileID: 1300807445}
   door3: {fileID: 876498205}
+  doorBoxes:
+  - {fileID: 2017926393}
+  - {fileID: 1575882917}
+  - {fileID: 919429768}
+  winnerKey: 0
   dm: {fileID: 157529043}
   pm: {fileID: 314394302}
   gm: {fileID: 1542004562}
@@ -273,6 +278,19 @@ MonoBehaviour:
       voice: {fileID: 0}
   dialogue:
     sentences: []
+  winDialog:
+    sentences:
+    - text: "Parab\xE9ns ao jogador vencedor "
+      delay: 2
+      voice: {fileID: 0}
+    - text: "Voc\xEA levar\xE1 para casa 1 milh\xE3o de reais em barras de ouro!"
+      delay: 2
+      voice: {fileID: 0}
+  drawDialog:
+    sentences:
+    - text: Que pena! Voces perderam! Voces sao todos uns lixos.
+      delay: 3
+      voice: {fileID: 0}
   file: {fileID: 4900000, guid: bdcef9050608b478ba29a1af55d52a11, type: 3}
 --- !u!224 &229148089
 RectTransform:
@@ -1706,6 +1724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 314394302}
+  dm: {fileID: 157529043}
   instructions: {fileID: 1608971901}
   silvio: {fileID: 229148088}
 --- !u!224 &1542004563

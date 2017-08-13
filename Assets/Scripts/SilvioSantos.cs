@@ -36,6 +36,10 @@ public class SilvioSantos : MonoBehaviour {
 	void Start(){
 		dialogue = new Dialogue(4);
 		dialogue.endDialog = CheckAnswer;
+		
+		winDialog.endDialog = gm.Reset;
+		drawDialog.endDialog = gm.Reset;
+
 		Scramble();
 		HideAnswers();
 	}
@@ -71,6 +75,8 @@ public class SilvioSantos : MonoBehaviour {
 				winnerKey = pc.playerKey; // Store potential winner key code
 			}
 		}
+
+		HideAnswers();
 
 		if(counter == 1) {
 		

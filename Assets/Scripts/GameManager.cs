@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	public static bool isPlaying { get; set; }
 
 	public GameObject instructions;
+	public GameObject textBox;
 	public SilvioSantos silvio;
 
 	// Use this for initialization
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour {
 
 	public void Reset(){
 		GameManager.isPlaying = false;
+		instructions.SetActive(true);
+		textBox.SetActive(false);
 		silvio.Reset();
 		pm.Reset();
 	}

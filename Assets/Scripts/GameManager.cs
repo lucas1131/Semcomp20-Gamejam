@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 
 	[UnityEngine.SerializeField]
 	public static bool isPlaying { get; set; }
+	[UnityEngine.SerializeField]
+	public static bool isBlocked { get; set; }
 
 	public GameObject instructions, textBox;
 	public AudioSource sfx, bgm;

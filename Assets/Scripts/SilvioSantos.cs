@@ -171,6 +171,7 @@ public class SilvioSantos : MonoBehaviour {
 		door3.text = answer3;
 
 		dm.StartDialog(dialogue, name);
+		GameManager.isBlocked = false;
 		index++;
 	}
 
@@ -202,6 +203,7 @@ public class SilvioSantos : MonoBehaviour {
 		yield return new WaitForSeconds(timeToDrums);
 		SFX.Play("drums");
 		yield return new WaitForSeconds(1.8f);
+		GameManager.isBlocked = true;
 		ShowAnswer();
 	}
 }

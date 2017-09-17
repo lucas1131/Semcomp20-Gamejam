@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 			break;
 		}
 
-		if(GameManager.isPlaying){
+		if(GameManager.isPlaying && !GameManager.isBlocked){
 			if(Input.GetKeyDown(PlayerManager.ToLower(playerKey) + "")){
 
 				selected = (selected+1)%(OPTIONS+1);
